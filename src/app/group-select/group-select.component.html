@@ -1,0 +1,18 @@
+<mat-select
+    [(ngModel)]="value"
+    (selectionChange)="onValueChange($event.value)"
+    (click)="onClick($event)"
+    [placeholder]="placeholder"
+    [matTooltip]="selectedValueTooltip"
+    disableOptionCentering="true"
+    [ngClass]="{ 'mat-select-thin': useBorder, 'mat-select-invalid': errorState }">
+    <mat-option *ngIf="useNone" [value]="''">None</mat-option>
+    <ng-container *ngIf="groups.length > 1">
+        <mat-optgroup *ngFor="let group of groups" [label]="group.name">
+            <mat-option *ngFor="let item of group.items" [value]="item.id" [matTooltip]="item.name">{{ item.name }}</mat-option>
+        </mat-optgroup>
+    </ng-container>
+    <ng-container *ngIf="groups.length == 1">
+        <mat-option *ngFor="let item of groups[0].items" [value]="item.id" [matTooltip]="item.name">{{ item.name }}</mat-option>
+    </ng-container>
+</mat-select>
